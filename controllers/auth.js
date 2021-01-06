@@ -4,10 +4,6 @@ const User = require('../models/user')
 
 exports.signup = (req, res) => {     
     console.log('signup called')    
-    // const { name, email, password } = req.body
-    // res.json({
-    //     user: { name, email, password }
-    // })
 
     User.findOne({ email: req.body.email}).exec((error, user) => {
         console.log('User.findOne called')
@@ -23,10 +19,12 @@ exports.signup = (req, res) => {
         newUser.save( (error, success) => {
             if(error) { 
                 console.log('test error')
-                return res.status(400).json({ error: 'test error' })
+                return res.status(400).json({ error: error })
             }
 
             return res.json({ user: success })
+
+
             // res.json({ message: 'Sign up success! Please sign in'})
         })
     })

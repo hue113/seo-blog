@@ -65,7 +65,6 @@ userSchema.virtual('password')
         console.log('this._password: ', this._password)
         this.salt = this.makeSalt()     // generate salt
         this.hashed_password = this.encryptPassword(password)   // encryptPassword
-        // console.log('this.encryptPassword(password)', this.encryptPassword(password))
     })                  
     .get(function() {
         console.log('get called')
