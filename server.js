@@ -2,7 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const bodyParser = require('body-parser')    // express.json()
+// const bodyParser = require('body-parser')    // express.json()
 const mongoose = require('mongoose')
 require('dotenv').config()
 
@@ -13,7 +13,7 @@ const authRoutes = require('./routes/auth')     // bring routes
 const app = express()
 
 // db
-mongoose.connect(process.env.DATABASE_LOCAL, {
+mongoose.connect(process.env.DATABASE_CLOUD, {
     useNewUrlParser: true,
     useCreateIndex: true, 
     useFindAndModify: false,
@@ -24,8 +24,7 @@ mongoose.connect(process.env.DATABASE_LOCAL, {
 
 // middlewares
 app.use(morgan('dev'))
-// app.use(express.json())         
-app.use(bodyParser.json())
+app.use(express.json())         // app.use(bodyParser.json())
 app.use(cookieParser())
 
 // routes middleware

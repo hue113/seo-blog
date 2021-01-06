@@ -60,20 +60,16 @@ const userSchema = new mongoose.Schema({
 // dont' use arrow fn here
 userSchema.virtual('password')          
     .set(function(password) {  
-        console.log('set called')         
         this._password = password       // create a temporary variable called password
-        console.log('this._password: ', this._password)
         this.salt = this.makeSalt()     // generate salt
         this.hashed_password = this.encryptPassword(password)   // encryptPassword
     })                  
     .get(function() {
-        console.log('get called')
         return this._password
     })
 
 userSchema.methods = {
     authenticate: function(plainText) {
-        console.log('method authenticate called')
         return this.encryptPassword(plainText) === this.hashed_password
     }, 
 
